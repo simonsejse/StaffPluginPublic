@@ -1,0 +1,7 @@
+name: StaffPlugin
+version: ${project.version}
+main: dk.simonwither.staff.StaffPlugin
+api-version: 1.16
+authors: [ simonsejse ]
+description: A plugin that makes personal staff more structered and easier for users to see.
+website: https://simonsejse.github.io/
