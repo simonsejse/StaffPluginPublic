@@ -1,0 +1,29 @@
+host: localhost
+username: test
+password: 123
+port: 3306
+databaseName: staff
+
+ranks:
+  Owner: 1
+  Moderator: 2
+  Helper: 3
+  Member: 4
+
+wrongAddNewStaffCommandUsage:
+  - "§e Wrong usage:"
+  - "§cUse:"
+  - "§8 - §7/rank add <user> <rank> <age> <description>"
+  - "§8 - §eFor example."
+  - "§8 - §7/rank add simonsejse Owner 20 I've been on this server since 2020!"
+
+UILoreConfiguration:
+  - "Username: {username}"
+  - "Age: {age} years old"
+  - "Rank: {rank}"
+  - "Motto: {desc}"
+  -
+#You can use all the different type of variables in here!
+#Example: §6§l{username} » {desc}
+    #§6§l{desc} » {rank} » {desc}
+UINameConfiguration: §6§l{username} » {age}
