@@ -10,8 +10,8 @@ import java.util.List;
 
 public class StaffListMenu extends AbstractPaginatedMenu {
 
-    private final List<String> UILoreConfiguration;
     private String UINameConfiguration;
+    private final List<String> UILoreConfiguration;
 
     public StaffListMenu(StaffPlugin staffPlugin){
         super(staffPlugin);
@@ -41,16 +41,19 @@ public class StaffListMenu extends AbstractPaginatedMenu {
                             return new ItemBuilder()
                                     .setPlayerSkull(entry.getKey())
                                     .setItemName(this.UINameConfiguration.replace("{rank}", value.getRank().getName()).replace("{username}", value.getUsername()).replace("{desc}", value.getDescription()).replace("{age}", String.valueOf(value.getAge())))
-                                    .setLore(executeUnaryOperator(value, this.UILoreConfiguration))
+                                    .setLore(executeOperatorForLore(value, this.UILoreConfiguration))
                                     .buildItem();
                         }
                 ).toArray(ItemStack[]::new);
     }
 
-    public String[] executeUnaryOperator(final StaffData staffData, List<String> listForUnaryOperator){
-        final List<String> list = listForUnaryOperator;
-        list.replaceAll(new UILoreReplacement(staffData));
-        return list.toArray(new String[list.size()]);
+    public String[] executeOperatorForLore(StaffData staffData, List<String> list){
+        final List<String> tempList = list;
+        return tempList.stream().map(s -> s.replace("{username}", staffData.getUsername())
+                .replace("{age}", String.valueOf(staffData.getAge()))
+                .replace("{rank}", staffData.getRank().getName())
+                .replace("{desc}", staffData.getDescription()))
+                .toArray(String[]::new);
     }
 
     @Override

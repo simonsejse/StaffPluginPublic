@@ -76,7 +76,10 @@ public final class StaffPlugin extends JavaPlugin {
             final String description = resultSet.getString(3);
             final Integer rankID = resultSet.getInt(4);
 
-            getStaffManager().addUser(playerUniqueID, new StaffData(username, age, description, getRankByID(rankID)));
+            final Rank rankByID = getRankByID(rankID);
+            if (rankByID != null) {
+                getStaffManager().addUser(playerUniqueID, new StaffData(username, rankByID, age, description));
+            }
         }catch(SQLException e){
             getLogger().warning(String.format("SQL exception was thrown: %s", e.getMessage()));
         }

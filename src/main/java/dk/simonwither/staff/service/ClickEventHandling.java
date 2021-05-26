@@ -11,8 +11,10 @@ public class ClickEventHandling implements Listener {
 
     @EventHandler
     public void onInventoryClickEvent(InventoryClickEvent e){
+
         if (e.getClickedInventory() == null) return;
         if (e.getClickedInventory().getHolder() == null) return;
+
         final InventoryHolder holder = e.getClickedInventory().getHolder();
         if (holder instanceof AbstractPaginatedMenu){
             e.setCancelled(true);
@@ -31,5 +33,4 @@ public class ClickEventHandling implements Listener {
 
         }
     }
-
 }

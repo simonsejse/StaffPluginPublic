@@ -14,7 +14,7 @@ public class InventoryDecorate {
     public static final ItemBuilder PREVIOUS_PAGE_ITEM = new ItemBuilder();
 
     public static void decorate(Inventory inventory, IntPredicate intPredicate, Material material){
-        IntStream.range(0, 9*6)
+        IntStream.range(0, inventory.getSize())
                 .filter(intPredicate)
                 .forEach(slot -> inventory.setItem(slot, new ItemStack(material)));
     }

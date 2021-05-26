@@ -6,7 +6,7 @@ public class StaffData {
     private String description;
     private Rank rank;
 
-    public StaffData(String username, Integer age, String description, Rank rank) {
+    public StaffData(String username, Rank rank, Integer age, String description) {
         this.username = username;
         this.age = age;
         this.description = description;

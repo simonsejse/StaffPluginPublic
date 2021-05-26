@@ -33,11 +33,9 @@ public abstract class AbstractPaginatedMenu implements InventoryHolder {
         final int nextPageSlot = inventoryDetails().getNextPageSlot();
         final IntPredicate predicate = inventoryDetails().getDecoration().negate().and(t -> t != backPageSlot).and(t -> t != nextPageSlot);
         final int inventorySize = inventoryDetails().getSize();
-
         Inventory newInventory = Bukkit.createInventory(this, inventorySize, inventoryDetails().getMenuName());
-        InventoryDecorate.decorate(newInventory, inventoryDetails().getDecoration(), Material.GREEN_STAINED_GLASS_PANE);
+        InventoryDecorate.decorate(newInventory, inventoryDetails().getDecoration(), inventoryDetails().getDecorationItem());
         for(int slot = 0 + offset, currentIndex = availableSlots * (page - 1); slot < inventorySize && currentIndex < itemStacks().length; slot++) {
-            if (currentPage > 1) currentIndex++;
             if (!predicate.test(slot)) continue;
             newInventory.setItem(slot, itemStacks()[currentIndex++]);
         }
@@ -45,11 +43,13 @@ public abstract class AbstractPaginatedMenu implements InventoryHolder {
         return newInventory;
     }
 
+
+
     protected void addPageIndicators(Inventory inventory){
-        int amountOfInventoriesNeededToBeCached = (int) Math.ceil(((double) itemStacks().length / inventoryDetails().getAvailableSlots()));
+        boolean isMorePages = itemStacks().length > getCurrentPage() * inventoryDetails().getAvailableSlots();
 
         ItemStack nextPageItem, backPageItem;
-        if (getCurrentPage() == amountOfInventoriesNeededToBeCached) nextPageItem = InventoryDecorate.NEXT_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&cNo more pages...").setLore("&7No more pages for the menu...").buildItem();
+        if (!isMorePages) nextPageItem = InventoryDecorate.NEXT_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&cNo more pages...").setLore("&7No more pages for the menu...").buildItem();
         else nextPageItem = InventoryDecorate.NEXT_PAGE_ITEM.setMaterial(Material.DARK_OAK_BUTTON).setItemName("&aNext page&2&l»").setLore("&7Click here to go to the next page..").buildItem();
         if (getCurrentPage() == 1) backPageItem = InventoryDecorate.PREVIOUS_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&4Du kan ikke gå længere tilbage").setLore("&cDu er allerede på den første side", "&cdu kan ikke komme længere tilbage!").buildItem();
         else backPageItem = InventoryDecorate.PREVIOUS_PAGE_ITEM.setMaterial(Material.DARK_OAK_BUTTON).setItemName("&4&l« &4Previous page").setLore("&cClick here to go to the previous page..").buildItem();

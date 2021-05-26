@@ -6,9 +6,8 @@ import dk.simonwither.staff.models.StaffData;
 import dk.simonwither.staff.models.WrongCommandArgumentUsageException;
 import org.bukkit.entity.Player;
 
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public class AddNewStaffArgument implements IStaffCommandArguments{
 
@@ -28,16 +27,32 @@ public class AddNewStaffArgument implements IStaffCommandArguments{
         return this.staffPlugin.getConfiguration().wrongAddNewStaffCommandUsage;
     }
 
-    private Rank[] randomRank = new Rank[]{new Rank("Owner", 1), new Rank("Admin", 2), new Rank("Mod", 3), new Rank("Helper", 4)};
-
     @Override
     public void perform(Player executor, String... args) throws WrongCommandArgumentUsageException {
         if (args.length < 5) throw new WrongCommandArgumentUsageException();
-        if (this.staffPlugin.getConfiguration().ranks.keySet().stream().filter(s -> s.equalsIgnoreCase(args[2])).findAny().isPresent()){
-            for(int i = 0; i < 100; i ++){
-                staffPlugin.getStaffManager().addUser(UUID.randomUUID(), new StaffData(String.valueOf(i), 20, "dsa", randomRank[new Random().nextInt(3)]));
-            }
+        final String rankArg = args[2];
+        final Optional<Map.Entry<String, Integer>> first = this.staffPlugin.getConfiguration().ranks.entrySet().stream().filter(s -> s.getKey().equalsIgnoreCase(rankArg)).findFirst();
+        final StringBuilder motto = new StringBuilder();
+        if (first.isPresent()){
+            //rank add <user> <rank> <age> <description>
+            final Integer age = getAge(args[3]);
+            final Rank rank = new Rank(first.get().getKey(), first.get().getValue());
+
+            IntStream.range(4, args.length).forEach(n -> motto.append(args[n]));
+
+            staffPlugin.getStaffManager().addUser(UUID.randomUUID(), new StaffData(args[1], rank, age, motto.toString()));
+            executor.sendMessage("§2"+args[1]+" §awas added as a "+rank.getName());
         } else throw new WrongCommandArgumentUsageException("§cRank does not exist.");
-        //TUDO: make other checks, for example checking if ranks exist...
+    }
+
+    public int getAge(String sAge){
+        try{
+            int age = Integer.parseInt(sAge);
+            return age;
+        }catch(NumberFormatException e){
+            return 99;
+        }
     }
 }
+
+

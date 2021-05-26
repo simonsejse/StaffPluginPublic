@@ -13,17 +13,22 @@ ranks:
 wrongAddNewStaffCommandUsage:
   - "§e Wrong usage:"
   - "§cUse:"
-  - "§8 - §7/rank add <user> <rank> <age> <description>"
+  - "§8 - §7/staff add <user> <rank> <age> <description>"
   - "§8 - §eFor example."
-  - "§8 - §7/rank add simonsejse Owner 20 I've been on this server since 2020!"
+  - "§8 - §7/staff add simonsejse Owner 20 I've been on this server since 2020!"
 
 UILoreConfiguration:
-  - "Username: {username}"
-  - "Age: {age} years old"
-  - "Rank: {rank}"
-  - "Motto: {desc}"
-  -
+  - "§6Username:§e {username}"
+  - "§6Age: §e{age} years old"
+  - "§6Rank: §e{rank}"
+  - "§6Motto: §e{desc}"
+
 #You can use all the different type of variables in here!
 #Example: §6§l{username} » {desc}
     #§6§l{desc} » {rank} » {desc}
 UINameConfiguration: §6§l{username} » {age}
+
+wrongHelpUsage:
+  - "§e Wrong usage:"
+  - "§cUse:"
+  - "§8 - §7/staff help"

@@ -13,4 +13,5 @@ public class Configuration {
     public List<String> wrongAddNewStaffCommandUsage;
     public List<String> UILoreConfiguration;
     public String UINameConfiguration;
+    public List<String> wrongHelpUsage;
 }
