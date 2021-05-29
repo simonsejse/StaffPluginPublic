@@ -21,7 +21,7 @@ public class ConnectionProvider {
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection("jdbc:mysql://"+configuration.host+":"+configuration.port+"/"+configuration.databaseName, configuration.username, configuration.password);
         }catch(java.lang.ClassNotFoundException | SQLException exception){
-            Bukkit.getLogger().warning(String.format("Exception was thrown: %s", exception.getMessage()));
+            System.out.println(String.format("Exception was thrown: %s", exception.getMessage()));
         }
     }
 

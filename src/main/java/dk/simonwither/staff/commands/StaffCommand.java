@@ -20,7 +20,8 @@ public class StaffCommand implements CommandExecutor {
         this.staffPlugin = staffPlugin;
         this.iStaffCommandArguments = new IStaffCommandArguments[]{
                 new AddNewStaffArgument(this.staffPlugin),
-                new HelpArgument(this.staffPlugin)
+                new HelpArgument(this.staffPlugin),
+                new RemoveStaffArgument(this.staffPlugin)
         };
     }
 

@@ -51,7 +51,7 @@ public abstract class AbstractPaginatedMenu implements InventoryHolder {
         ItemStack nextPageItem, backPageItem;
         if (!isMorePages) nextPageItem = InventoryDecorate.NEXT_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&cNo more pages...").setLore("&7No more pages for the menu...").buildItem();
         else nextPageItem = InventoryDecorate.NEXT_PAGE_ITEM.setMaterial(Material.DARK_OAK_BUTTON).setItemName("&aNext page&2&l»").setLore("&7Click here to go to the next page..").buildItem();
-        if (getCurrentPage() == 1) backPageItem = InventoryDecorate.PREVIOUS_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&4Du kan ikke gå længere tilbage").setLore("&cDu er allerede på den første side", "&cdu kan ikke komme længere tilbage!").buildItem();
+        if (getCurrentPage() == 1) backPageItem = InventoryDecorate.PREVIOUS_PAGE_ITEM.setMaterial(Material.BARRIER).setItemName("&4You cant go further back!").setLore("&cYou're on the first page", "&cyou can't go further back!").buildItem();
         else backPageItem = InventoryDecorate.PREVIOUS_PAGE_ITEM.setMaterial(Material.DARK_OAK_BUTTON).setItemName("&4&l« &4Previous page").setLore("&cClick here to go to the previous page..").buildItem();
 
         inventory.setItem(this.inventoryDetails().getBackPageSlot(), backPageItem);

@@ -1,9 +1,21 @@
+#MySQL settings
 host: localhost
 username: test
 password: 123
 port: 3306
 databaseName: staff
 
+#These are the ranks you can have ingame
+#It's made with priority so basically the lower key pair value is the higher the priority is
+#Example if you want owner to be shown first in the menu then set it to 1, if you wanted
+#Moderator or a new rank you added yourself for example if you added
+#ranks:
+  #  Banana: 1
+  #  Owner: 2
+  #  Moderator: 3
+  #  Helper: 4
+  #  Member: 5
+#then the Banana rank would be the first to be shown in the UI.
 ranks:
   Owner: 1
   Moderator: 2
@@ -32,3 +44,18 @@ wrongHelpUsage:
   - "§e Wrong usage:"
   - "§cUse:"
   - "§8 - §7/staff help"
+
+wrongRemoveStaffUsage:
+  - "§e Wrong usage:"
+  - "§cUse:"
+  - "§8 - §7/staff remove <user>"
+  - "§8 - §eFor example."
+  - "§8 - §7/staff remove simonsejse"
+
+
+userNotStaffErrorMessage: §cUser isn't staff!
+userRemovedFromStaff: §4{user}§c was removed from staff!
+#Change to false if you do not wish to get a message every 30th minute that staff was saved.
+sendAutomaticallySavedMessage: true
+automaticallySavedMessage: §cStaff users has been saved to DB!
+couldNotFetchData: §cData could not be fetched from API!
